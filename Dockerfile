@@ -1,4 +1,5 @@
-FROM php:8.1-apache
-COPY . /var/www/html/ # Copy your PHP code to the Apache web root
-RUN apt-get update && apt-get install -y git zip unzip
-RUN docker-php-ext-install pdo_mysql # Install necessary extensions
+FROM php:8.1-apache 
+RUN docker-php-ext-install mysqli pdo pdo_mysql 
+RUN a2enmod rewrite
+COPY . /var/www/html/
+RUN chown -R www-data:www-data /var/www/html/
